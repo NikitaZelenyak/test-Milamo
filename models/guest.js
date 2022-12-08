@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const handlerSchemaErrors = require("../helpers/handlerSchemaErrors");
 const pattern = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}/;
 const guestSchema = Schema(
   {
@@ -36,7 +37,7 @@ const addSchema = Joi.object({
 const schemas = {
   addSchema,
 };
-
+guestSchema.post("save", handlerSchemaErrors);
 const Guest = model("guest", guestSchema);
 
 module.exports = {

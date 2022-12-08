@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-
+const handlerSchemaErrors = require("../helpers/handlerSchemaErrors");
 const staffSchema = Schema(
   {
     firstName: {
@@ -31,6 +31,7 @@ const addSchema = Joi.object({
 const schemas = {
   addSchema,
 };
+staffSchema.post("save", handlerSchemaErrors);
 
 const Staff = model("staff", staffSchema);
 

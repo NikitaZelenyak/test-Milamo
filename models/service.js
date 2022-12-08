@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const handlerSchemaErrors = require("../helpers/handlerSchemaErrors");
 
 const serviceSchema = Schema(
   {
@@ -31,6 +32,7 @@ const addSchema = Joi.object({
 const schemas = {
   addSchema,
 };
+serviceSchema.post("save", handlerSchemaErrors);
 
 const Service = model("service", serviceSchema);
 

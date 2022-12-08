@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-
+const handlerSchemaErrors = require("../helpers/handlerSchemaErrors");
 const appointmentSchema = Schema(
   {
     guest: {
@@ -19,9 +19,17 @@ const appointmentSchema = Schema(
       type: String,
       required: [true, "Set date for appointment"],
     },
-    time: {
+    timeStart: {
       type: String,
       required: [true, "Set time for appointment"],
+    },
+    timeEnd: {
+      type: String,
+      required: [true, "Set time for appointment"],
+    },
+    confirm: {
+      type: Boolean,
+      default: false,
     },
   },
   {
@@ -31,16 +39,23 @@ const appointmentSchema = Schema(
 );
 
 const addSchema = Joi.object({
-  name: Joi.string().required(),
+  guest: Joi.string().required(),
   staff: Joi.string().required(),
-  service: Joi.number().required(),
+  service: Joi.string().required(),
   date: Joi.string().required(),
-  time: Joi.string().required(),
+  timeStart: Joi.string().required(),
+  timeEnd: Joi.string().required(),
+  confirm: Joi.boolean().default(false),
 });
 
+const confirmSchema = Joi.object({
+  confirm: Joi.boolean().required(),
+});
 const schemas = {
   addSchema,
+  confirmSchema,
 };
+appointmentSchema.post("save", handlerSchemaErrors);
 
 const Appointment = model("appointment", appointmentSchema);
 

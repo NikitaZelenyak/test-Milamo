@@ -5,12 +5,14 @@ const app = express();
 const guestRouter = require("./routes/api/guests");
 const staffRouter = require("./routes/api/staffs");
 const serviceRouter = require("./routes/api/services");
+const appointmentRouter = require("./routes/api/appointment");
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/guests", guestRouter);
 app.use("/api/staffs", staffRouter);
 app.use("/api/services", serviceRouter);
+app.use("/api/appointments", appointmentRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
