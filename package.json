@@ -1,5 +1,5 @@
 {
-  "name": "test-Milano",
+  "name": "testMilano",
   "version": "1.0.0",
   "homepage": "https://github.com/NikitaZelenyak/test-Milano",
   "description": "",
@@ -23,5 +23,5 @@
   "devDependencies": {
     "jest": "^29.1.2",
     "nodemon": "2.0.15"
-  },
+  }
 }
