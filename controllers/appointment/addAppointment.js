@@ -6,8 +6,12 @@ const addAppointment = async (req, res) => {
 
   const isBooked = appointments.some((appointment) => {
     return (
-      Number(appointment.timeStart) <= Number(timeStart) &&
-      Number(timeStart) <= Number(appointment.timeEnd)
+      (Number(appointment.timeStart) <= Number(timeStart) &&
+        Number(timeStart) <= Number(appointment.timeEnd) &&
+        Number(timeEnd) >= Number(appointment.timeEnd)) ||
+      (Number(appointment.timeStart) <= Number(timeStart) &&
+        Number(timeStart) <= Number(appointment.timeEnd) &&
+        Number(timeEnd) <= Number(appointment.timeStart))
     );
   });
 
