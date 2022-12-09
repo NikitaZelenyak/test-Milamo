@@ -1,6 +1,7 @@
 {
   "name": "test-Milano",
   "version": "1.0.0",
+  "homepage": "https://github.com/NikitaZelenyak/test-Milano",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,15 +24,4 @@
     "jest": "^29.1.2",
     "nodemon": "2.0.15"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NikitaZelenyak/test-Milano.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NikitaZelenyak/test-Milano/issues"
-  },
-  "homepage": "https://github.com/NikitaZelenyak/test-Milano#readme"
 }
