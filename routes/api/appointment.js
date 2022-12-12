@@ -16,7 +16,7 @@ router.post(
 
 router.put(
   "/:appointmentId",
-  validation(schemas.addSchema),
+  validation(schemas.updateSchema),
   ctrlWrapper(ctrl.updateAppointment)
 );
 router.patch(

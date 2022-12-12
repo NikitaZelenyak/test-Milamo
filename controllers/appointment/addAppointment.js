@@ -1,22 +1,11 @@
 const { Appointment } = require("../../models/appointment");
 const { Conflict } = require("http-errors");
 const addAppointment = async (req, res) => {
-  const { timeStart, timeEnd, date, staff } = req.body;
-  const appointments = await Appointment.find({ date, staff });
-
-  const isBooked = appointments.some((appointment) => {
-    return (
-      (Number(appointment.timeStart) <= Number(timeStart) &&
-        Number(timeStart) <= Number(appointment.timeEnd) &&
-        Number(timeEnd) >= Number(appointment.timeEnd)) ||
-      (Number(appointment.timeStart) <= Number(timeStart) &&
-        Number(timeStart) <= Number(appointment.timeEnd) &&
-        Number(timeEnd) <= Number(appointment.timeStart))
-    );
-  });
-
-  if (isBooked) {
-    throw new Conflict(`This ${timeStart}-${timeEnd} is busy`);
+  const { date, staff } = req.body;
+  const isBooked = await Appointment.find({ date, staff });
+  console.log(isBooked);
+  if (isBooked.length > 0) {
+    throw new Conflict(`This staff:${staff} is busy`);
   }
 
   const result = await Appointment.create({ ...req.body });

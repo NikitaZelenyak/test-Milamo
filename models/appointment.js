@@ -48,10 +48,18 @@ const addSchema = Joi.object({
   confirm: Joi.boolean().default(false),
 });
 
+const updateSchema = Joi.object({
+  date: Joi.string().required(),
+  timeStart: Joi.string().required(),
+  timeEnd: Joi.string().required(),
+  confirm: Joi.boolean().default(false),
+});
+
 const confirmSchema = Joi.object({
   confirm: Joi.boolean().required(),
 });
 const schemas = {
+  updateSchema,
   addSchema,
   confirmSchema,
 };
