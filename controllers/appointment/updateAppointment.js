@@ -3,18 +3,13 @@ const { NotFound, Conflict } = require("http-errors");
 
 const updateAppointment = async (req, res) => {
   const { appointmentId } = req.params;
-  const { timeStart, timeEnd, date, staff } = req.body;
-  const appointments = await Appointment.find({ date, staff });
+  const { date, staff, confirm } = req.body;
+  const isBooked = await Appointment.find({ date, staff });
 
-  const isBooked = appointments.some((appointment) => {
-    return (
-      Number(appointment.timeStart) <= Number(timeStart) &&
-      Number(timeStart) <= Number(appointment.timeEnd)
-    );
-  });
-  if (isBooked) {
-    throw new Conflict(`This ${timeStart}-${timeEnd} is busy`);
+  if (isBooked.length > 0) {
+    throw new Conflict(`This staff:${staff} is busy`);
   }
+
   const result = await Appointment.findByIdAndUpdate(appointmentId, req.body, {
     new: true,
   });

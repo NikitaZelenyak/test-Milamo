@@ -1,9 +1,9 @@
 const { Appointment } = require("../../models/appointment");
 const { Conflict } = require("http-errors");
 const addAppointment = async (req, res) => {
-  const { date, staff } = req.body;
-  const isBooked = await Appointment.find({ date, staff });
-  console.log(isBooked);
+  const { date, staff, confirm } = req.body;
+  const isBooked = await Appointment.find({ date, staff, confirm: false });
+
   if (isBooked.length > 0) {
     throw new Conflict(`This staff:${staff} is busy`);
   }
